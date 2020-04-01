@@ -6,7 +6,7 @@ import argparse
 import torch
 import torch.backends.cudnn as cudnn
 import numpy as np
-from configs import cfg_mnet, cfg_re50
+from configs import cfg_mnet, cfg_re50, cfg_re101, cfg_se_resnext101_32x4d
 from layers.functions.prior_box import PriorBox
 from utils.nms.py_cpu_nms import py_cpu_nms
 import cv2
@@ -75,6 +75,10 @@ if __name__ == '__main__':
 		cfg = cfg_mnet
 	elif args.network == "resnet50":
 		cfg = cfg_re50
+	elif args.network == "resnet101":
+		cfg = cfg_re101
+	elif args.network == "se_resnext101_32x4d":
+		cfg = cfg_se_resnext101_32x4d
 	# net and model
 	net = RetinaFace(cfg=cfg, phase = 'test')
 	net = load_model(net, args.trained_model, args.cpu)
